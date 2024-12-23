@@ -1,0 +1,150 @@
+html,
+body {
+  background-color: #211F2B; /* Fallback for no image */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  margin: 0;
+  height: 100%;
+  overflow: hidden; /* Prevent unwanted scroll */
+  position: relative; /* Establish stacking context */
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/static/img/background.png"); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0; /* Keep background below content */
+  filter: blur(10px);
+  opacity: 0.8;
+}
+
+.container {
+  position: relative; /* Ensure it stacks above the background */
+  z-index: 1; /* Bring content above the background */
+  background-color: rgb(255, 255, 255);
+  width: 300px;
+  margin: 0 auto;
+  border-radius: 14px;
+  padding: 30px 30px 20px 30px;
+  margin-top: 50px;
+}
+
+
+h1,
+h2 {
+  margin: 0;
+  position: relative; /* Ensure these also stack above the background */
+  z-index: 1;
+}
+
+h1 {
+  color: black;
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+h2 {
+  color: grey;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.container {
+  background-color: white;
+  width: 300px;
+  margin: 0 auto;
+  border-radius: 14px;
+  padding: 30px 30px 20px 30px;
+  margin-top: 180px;
+  z-index: 1;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: white;
+  position: relative; /* Ensure these also stack above the background */
+  z-index: 1;
+}
+
+.divider {
+  width: 100px;
+  height: 3px;
+  margin: 20px auto;
+  background-color: #617BFF;
+}
+
+input,
+textarea {
+  position: relative;
+  text-align: center;
+  display: block;
+  margin: 0;
+  border-radius: 7px;
+  border: 2px #6c44fc solid;
+  background-color: white;
+  padding: 10px 20px;
+  width: 100%;
+  color: #1E1C29;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 2px #617BFF solid;
+}
+
+input[name="amount"] {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#btn-send {
+  display: block;
+  text-decoration: none;
+  border-radius: 7px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 600;
+  border: 2px darkblue solid;
+  color: white;
+  background-color: darkblue;
+  padding: 15px;
+  transition: all 0.2s;
+  z-index: 1;
+}
+
+#btn-send:hover {
+  border: 2px blue solid;
+  background-color: blue;
+}
+
+textarea[name="address"] {
+  resize: none;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 2.7rem;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}

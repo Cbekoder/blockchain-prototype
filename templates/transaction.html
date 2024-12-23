@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <title>Transaction</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
+    <!-- TODO: Step 1: Include Fortmatic SDK Script -->
+    <link rel="icon" type="image/x-icon" href="{% static 'img/blockchain.png' %}">
+    <link rel="stylesheet" href="{% static 'css/transaction.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- End Step 1 -->
+</head>
+
+<body>
+<form method="post" class="container">{% csrf_token %}
+    <svg xmlns="http://www.w3.org/2000/svg" height="32" width="40" viewBox="0 0 640 512">
+        <path fill="#1a5fb4"
+              d="M535 41c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l64 64c4.5 4.5 7 10.6 7 17s-2.5 12.5-7 17l-64 64c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l23-23L384 112c-13.3 0-24-10.7-24-24s10.7-24 24-24l174.1 0L535 41zM105 377l-23 23L256 400c13.3 0 24 10.7 24 24s-10.7 24-24 24L81.9 448l23 23c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L7 441c-4.5-4.5-7-10.6-7-17s2.5-12.5 7-17l64-64c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM96 64l241.9 0c-3.7 7.2-5.9 15.3-5.9 24c0 28.7 23.3 52 52 52l117.4 0c-4 17 .6 35.5 13.8 48.8c20.3 20.3 53.2 20.3 73.5 0L608 169.5 608 384c0 35.3-28.7 64-64 64l-241.9 0c3.7-7.2 5.9-15.3 5.9-24c0-28.7-23.3-52-52-52l-117.4 0c4-17-.6-35.5-13.8-48.8c-20.3-20.3-53.2-20.3-73.5 0L32 342.5 32 128c0-35.3 28.7-64 64-64zm64 64l-64 0 0 64c35.3 0 64-28.7 64-64zM544 320c-35.3 0-64 28.7-64 64l64 0 0-64zM320 352a96 96 0 1 0 0-192 96 96 0 1 0 0 192z"/>
+    </svg>
+    <h1>Transfer your money to another user️</h1>
+    <div class="divider"></div>
+    <h2>Destination address</h2>
+    <textarea id="input-address" placeholder="0x23klh2l3k4jl23jh5kl23j4kfjsh2432jl3" required name="address" cols="21" rows="2" maxlength="42"></textarea>
+    <h2>Amount to send in test money</h2>
+    <input id="input-amount" type="number" placeholder="10.00" name="amount" required/>
+    {% for error in errors %}
+    <p>{{ error }}</p>
+    {% endfor %}
+    <button style="margin-left: 120px" id="btn-send" type="submit">Send Transaction</button>
+</form>
+<menu class="menu">
+
+    <a href="/" class="menu__item" style="--bgColorItem: darkblue;">
+        <svg class="icon" viewBox="0 0 448 512">
+            <path fill="#ffffff"
+                  d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/>
+        </svg>
+    </a>
+
+    <a href="#" class="menu__item active" style="--bgColorItem: darkblue;">
+        <svg class="icon" viewBox="0 0 640 512">
+            <path fill="#ffffff"
+                  d="M535 41c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l64 64c4.5 4.5 7 10.6 7 17s-2.5 12.5-7 17l-64 64c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l23-23L384 112c-13.3 0-24-10.7-24-24s10.7-24 24-24l174.1 0L535 41zM105 377l-23 23L256 400c13.3 0 24 10.7 24 24s-10.7 24-24 24L81.9 448l23 23c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L7 441c-4.5-4.5-7-10.6-7-17s2.5-12.5 7-17l64-64c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM96 64l241.9 0c-3.7 7.2-5.9 15.3-5.9 24c0 28.7 23.3 52 52 52l117.4 0c-4 17 .6 35.5 13.8 48.8c20.3 20.3 53.2 20.3 73.5 0L608 169.5 608 384c0 35.3-28.7 64-64 64l-241.9 0c3.7-7.2 5.9-15.3 5.9-24c0-28.7-23.3-52-52-52l-117.4 0c4-17-.6-35.5-13.8-48.8c-20.3-20.3-53.2-20.3-73.5 0L32 342.5 32 128c0-35.3 28.7-64 64-64zm64 64l-64 0 0 64c35.3 0 64-28.7 64-64zM544 320c-35.3 0-64 28.7-64 64l64 0 0-64zM320 352a96 96 0 1 0 0-192 96 96 0 1 0 0 192z"/>
+        </svg>
+    </a>
+
+    <a href="/blockchain/" class="menu__item" style="--bgColorItem: darkblue;">
+        <svg class="icon" viewBox="0 0 512 512">
+            <path fill="#ffffff"
+                  d="M234.5 5.7c13.9-5 29.1-5 43.1 0l192 68.6C495 83.4 512 107.5 512 134.6l0 242.9c0 27-17 51.2-42.5 60.3l-192 68.6c-13.9 5-29.1 5-43.1 0l-192-68.6C17 428.6 0 404.5 0 377.4L0 134.6c0-27 17-51.2 42.5-60.3l192-68.6zM256 66L82.3 128 256 190l173.7-62L256 66zm32 368.6l160-57.1 0-188L288 246.6l0 188z"/>
+        </svg>
+
+    </a>
+
+    <a href="/validator/" class="menu__item" style="--bgColorItem: darkblue;">
+        <svg class="icon" viewBox="0 0 512 512">
+            <path fill="#ffffff"
+                  d="M260.4 254.9 131.5 33.1a2.2 2.2 0 0 0 -3.8 0L.3 254.9A2.2 2.2 0 0 0 .3 257.1L129.1 478.9a2.2 2.2 0 0 0 3.8 0L260.4 257.1A2.2 2.2 0 0 0 260.4 254.9zm39.1-25.7a2.2 2.2 0 0 0 1.9 1.1h66.5a2.2 2.2 0 0 0 1.9-3.3L259.1 33.1a2.2 2.2 0 0 0 -1.9-1.1H190.7a2.2 2.2 0 0 0 -1.9 3.3zM511.7 254.9 384.9 33.1A2.2 2.2 0 0 0 383 32h-66.6a2.2 2.2 0 0 0 -1.9 3.3L440.7 256 314.5 476.7a2.2 2.2 0 0 0 1.9 3.3h66.6a2.2 2.2 0 0 0 1.9-1.1L511.7 257.1A2.2 2.2 0 0 0 511.7 254.9zM366 284.9H299.5a2.2 2.2 0 0 0 -1.9 1.1l-108.8 190.6a2.2 2.2 0 0 0 1.9 3.3h66.5a2.2 2.2 0 0 0 1.9-1.1l108.8-190.6A2.2 2.2 0 0 0 366 284.9z"/>
+        </svg>
+    </a>
+
+    <a href="/qr/" class="menu__item" style="--bgColorItem: darkblue;">
+        <svg class="icon" viewBox="0 0 448 512">
+            <path fill="#ffffff"
+                  d="M0 80C0 53.5 21.5 32 48 32l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48L0 80zM64 96l0 64 64 0 0-64L64 96zM0 336c0-26.5 21.5-48 48-48l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-96zm64 16l0 64 64 0 0-64-64 0zM304 32l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-96c0-26.5 21.5-48 48-48zm80 64l-64 0 0 64 64 0 0-64zM256 304c0-8.8 7.2-16 16-16l64 0c8.8 0 16 7.2 16 16s7.2 16 16 16l32 0c8.8 0 16-7.2 16-16s7.2-16 16-16s16 7.2 16 16l0 96c0 8.8-7.2 16-16 16l-64 0c-8.8 0-16-7.2-16-16s-7.2-16-16-16s-16 7.2-16 16l0 64c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-160zM368 480a16 16 0 1 1 0-32 16 16 0 1 1 0 32zm64 0a16 16 0 1 1 0-32 16 16 0 1 1 0 32z"/>
+        </svg>
+    </a>
+
+    <a href="/user/profile/" class="menu__item" style="--bgColorItem: darkblue;">
+        <svg class="icon" viewBox="0 0 448 512">
+            <path fill="#ffffff"
+                  d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z"/>
+        </svg>
+    </a>
+
+    <div class="menu__border"></div>
+
+</menu>
+</body>
+{#<script>#}
+{#    let handleSendTransaction = function (amount, address) {#}
+{#        // TODO: Step 3: Send Transaction Implementation#}
+{#        // End Step 3#}
+{#    };#}
+{#    // Initialize elements and events (no need to change)#}
+{#    const defaultAmount = 0.01;#}
+{#    const defaultAddress = '0x22b05d73097c0a2440d29af61db4b4ed3803e55e';#}
+{#    const inputAmount = document.getElementById('input-amount');#}
+{#    inputAmount.setAttribute('placeholder', defaultAmount);#}
+{#    inputAmount.setAttribute('value', defaultAmount);#}
+{#    const inputAddress = document.getElementById('input-address');#}
+{#    inputAddress.setAttribute('placeholder', defaultAddress);#}
+{#    inputAddress.innerText = defaultAddress;#}
+{#    document.getElementById('btn-send').onclick = function () {#}
+{#        let amount = inputAmount.value ? inputAmount.value : defaultAmount;#}
+{#        let address = inputAddress.value ? inputAddress.value : defaultAddress;#}
+{#        handleSendTransaction(amount, address);#}
+{#    };#}
+{##}
+{#</script>#}
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Login & Registration Form | Codehal</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/blockchain.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+<body>
+<div class="wrapper">
+    <div class="form-wrapper sign-in">
+        <form method="post">{% csrf_token %}
+            <h2>Login</h2>
+            <div class="input-group">
+                <input name="username" type="text" required>
+                <label for="">Username</label>
+            </div>
+            <div class="input-group">
+                <input id="password" name="password" type="password" required oninput="checkPasswords()"/>
+                <label for="password">Password</label>
+            </div>
+            <div class="input-group">
+                <input id="confirm-password" name="confirm_password" type="password" required
+                       oninput="checkPasswords()"/>
+                <label for="confirm-password">Confirm password</label>
+            </div>
+            <div class="remember">
+                <label><input type="checkbox" required> I agree to the terms & conditions</label>
+            </div>
+            {% for message in errors %}
+                <p style="color: red">{{ message }}</p>
+            {% endfor %}
+            <p id="password-message" style="color: red; display: none;">Passwords do not match!</p>
+            <button type="submit">Register</button>
+            <div class="signUp-link">
+                <p>Already have an account? <a href="{% url 'login' %}" class="signInBtn-link">Sign In</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function checkPasswords() {
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+        const message = document.getElementById("password-message");
+
+        if (password && confirmPassword) {
+            if (password === confirmPassword) {
+                message.style.display = "none"; // Hide the message
+            } else {
+                message.style.display = "block"; // Show the message
+            }
+        } else {
+            message.style.display = "none"; // Hide the message if fields are empty
+        }
+    }
+
+</script>
+</body>
+</html>

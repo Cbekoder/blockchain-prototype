@@ -1,0 +1,52 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.terminal-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #000;
+    color: #00ff00;
+}
+
+.terminal {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.transaction {
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.prompt {
+    color: #ff00ff;
+    margin-right: 10px;
+}
+
+.menu-space {
+    height: 60px;
+    background-color: #333;
+    /* Add any additional styling for your menu here */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .terminal {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .terminal {
+        font-size: 10px;
+    }
+}
+
